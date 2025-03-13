@@ -16,12 +16,20 @@ const llm = new ChatOpenAI({
   temperature: 0,
 });
 
-const embeddings = new OpenAIEmbeddings(); // 한 번만 생성
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" }); // 한 번만 생성
 
 const prompt = ChatPromptTemplate.fromTemplate(`
-  Answer the user's question based on the provided context.
-  Context: {context}
-  Question: {input}
+    You are a helpful assistant providing detailed responses.
+
+  Please format your response in multiple paragraphs to improve readability.
+  
+  Context:
+  {context}
+
+  Question:
+  {input}
+  
+  Response:
 `);
 
 const loadDocs = async () => {
